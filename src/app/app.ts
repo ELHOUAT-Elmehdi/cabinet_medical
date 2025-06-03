@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import {RouterModule, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  standalone: true,
+  imports: [CommonModule, RouterOutlet,RouterModule],
+  template: `
+    <router-outlet></router-outlet>
+  `,
+  styleUrls: ['./app.css']
 })
-export class App {
-  protected title = 'cabinet_medical';
+export class AppComponent {
+  title = 'cabinet-medical';
 }

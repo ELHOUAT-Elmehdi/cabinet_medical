@@ -1,0 +1,179 @@
+<div class="accueil-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <h1 class="app-title">
+        <i class="fas fa-stethoscope"></i>
+        Cabinet Médical
+      </h1>
+
+      <!-- Navigation utilisateur -->
+      <div class="user-nav" *ngIf="isAuthenticated">
+        <span class="welcome-message">
+          Bonjour, <strong>{{ userName }}</strong>
+          <span class="user-role">({{ userRole }})</span>
+        </span>
+        <button class="btn btn-outline" (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i>
+          Déconnexion
+        </button>
+      </div>
+
+      <!-- Boutons de connexion si non authentifié -->
+      <div class="auth-buttons" *ngIf="!isAuthenticated">
+        <button class="btn btn-primary" (click)="navigateToLogin()">
+          <i class="fas fa-sign-in-alt"></i>
+          Connexion
+        </button>
+        <button class="btn btn-outline" (click)="navigateToRegister()">
+          <i class="fas fa-user-plus"></i>
+          S'inscrire
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <main class="main-content">
+
+    <!-- Section d'accueil pour utilisateurs non connectés -->
+    <section class="welcome-section" *ngIf="!isAuthenticated">
+      <div class="hero">
+        <h2>Bienvenue dans votre Cabinet Médical</h2>
+        <p class="hero-description">
+          Gérez efficacement vos consultations, patients et rendez-vous
+          avec notre solution complète de gestion médicale.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-large" (click)="navigateToLogin()">
+            Commencer maintenant
+          </button>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature-card">
+          <i class="fas fa-users feature-icon"></i>
+          <h3>Gestion des Patients</h3>
+          <p>Centraliser les informations et historiques médicaux</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-user-md feature-icon"></i>
+          <h3>Espace Médecin</h3>
+          <p>Gérer les consultations et suivis patients</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-calendar-alt feature-icon"></i>
+          <h3>Planning Intégré</h3>
+          <p>Organiser les rendez-vous et consultations</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard pour utilisateurs connectés -->
+    <section class="dashboard" *ngIf="isAuthenticated">
+
+      <!-- Statistiques rapides -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon patients">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-info">
+            <h3>{{ stats.totalPatients }}</h3>
+            <p>Patients enregistrés</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon medecins">
+            <i class="fas fa-user-md"></i>
+          </div>
+          <div class="stat-info">
+            <h3>{{ stats.totalMedecins }}</h3>
+            <p>Médecins actifs</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon consultations">
+            <i class="fas fa-stethoscope"></i>
+          </div>
+          <div class="stat-info">
+            <h3>{{ stats.consultationsToday }}</h3>
+            <p>Consultations aujourd'hui</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon rendez-vous">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="stat-info">
+            <h3>{{ stats.rendezVousEnAttente }}</h3>
+            <p>RDV en attente</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accès rapide aux modules -->
+      <div class="modules-section">
+        <h2>Accès rapide</h2>
+        <div class="modules-grid">
+
+          <!-- Module Admin -->
+          <div class="module-card"
+               *ngIf="userRole === 'admin'"
+               (click)="navigateToModule('admin')">
+            <div class="module-icon admin">
+              <i class="fas fa-cogs"></i>
+            </div>
+            <h3>Administration</h3>
+            <p>Gérer les patients, médecins et paramètres système</p>
+            <div class="module-arrow">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+
+          <!-- Module Médecin -->
+          <div class="module-card"
+               *ngIf="userRole === 'admin' || userRole === 'medecin'"
+               (click)="navigateToModule('medecin')">
+            <div class="module-icon medecin">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <h3>Espace Médecin</h3>
+            <p>Gérer les consultations et suivis patients</p>
+            <div class="module-arrow">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+
+          <!-- Module Patient -->
+          <div class="module-card"
+               *ngIf="userRole === 'patient'"
+               (click)="navigateToModule('patient')">
+            <div class="module-icon patient">
+              <i class="fas fa-user"></i>
+            </div>
+            <h3>Espace Patient</h3>
+            <p>Consulter vos historiques et rendez-vous</p>
+            <div class="module-arrow">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2024 Cabinet Médical - Système de gestion médicale</p>
+    </div>
+  </footer>
+
+</div>
