@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f7f9fc;
+}
+
+.signup-card {
+  display: flex;
+  max-width: 1000px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.signup-image {
+  flex: 1;
+  background: white;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.signup-form {
+  flex: 1;
+  padding: 2rem 3rem;
+}
+
+.signup-form .title {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+form .row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+  flex: 1;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  width: 100%;
+  padding: 0.7rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:disabled {
+  background: #a0c4ff;
+  cursor: not-allowed;
+}
+
+.login-text {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.login-text a {
+  color: #007bff;
+  text-decoration: none;
+}
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}

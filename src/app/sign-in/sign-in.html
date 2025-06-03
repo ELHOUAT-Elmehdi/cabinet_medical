@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="login-card">
+    <div class="login-image">
+      <img src="assets/cabinet.png" alt="illustration médecin" />
+    </div>
+    <div class="login-form">
+      <h2 class="title">CONNEXION</h2>
+
+      <!-- Message d'erreur général -->
+      <div *ngIf="error" class="error-message general-error">
+        {{ error }}
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="submit()">
+        <!-- Email -->
+        <div class="input-group">
+          <input type="email" formControlName="email" placeholder="Adresse Email" />
+          <div *ngIf="f('email')?.invalid && (f('email')?.dirty || f('email')?.touched || submitted)"
+               class="error-message">
+            {{ getError('email') }}
+          </div>
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="input-group">
+          <div class="password-container">
+            <input [type]="hidePassword ? 'password' : 'text'"
+                   formControlName="password"
+                   placeholder="Mot de passe" />
+            <span class="toggle-pwd" (click)="hidePassword = !hidePassword">
+              {{ hidePassword ? '👁️' : '👁️‍🗨️' }}
+            </span>
+          </div>
+          <div *ngIf="f('password')?.invalid && (f('password')?.dirty || f('password')?.touched || submitted)"
+               class="error-message">
+            {{ getError('password') }}
+          </div>
+        </div>
+
+        <!-- Se souvenir de moi -->
+        <div class="remember-forgot">
+          <label class="remember-me">
+            <input type="checkbox" formControlName="rememberMe" /> Se souvenir de moi
+          </label>
+          <a routerLink="/forgot-password" class="forgot-password">Mot de passe oublié?</a>
+        </div>
+
+        <!-- Bouton de connexion -->
+        <button type="submit" [disabled]="loading">
+          <span *ngIf="!loading">Se connecter</span>
+          <span *ngIf="loading">Connexion en cours...</span>
+        </button>
+
+        <!-- Lien vers l'inscription -->
+        <p class="signup-text">Vous n'avez pas de compte? <a routerLink="/sign-up">S'inscrire</a></p>
+      </form>
+    </div>
+  </div>
+</div>
