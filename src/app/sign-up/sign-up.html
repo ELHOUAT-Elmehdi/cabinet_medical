@@ -1,0 +1,146 @@
+<div class="container">
+  <button class="home-button" routerLink="/" title="Retour à l'accueil">
+    <i class="fas fa-home"></i>
+    <span>Accueil</span>
+  </button>
+  <div class="signup-card">
+    <div class="signup-image">
+      <img src="assets/cabinet.jpg" alt="illustration médecin" />
+    </div>
+    <div class="signup-form">
+      <h2 class="title">BIENVENUE</h2>
+      <form [formGroup]="signUpForm" (ngSubmit)="submit()">
+        <!-- Genre -->
+        <div class="row">
+          <label>Genre</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" formControlName="gender" value="Homme" /> Homme
+            </label>
+            <label class="radio-label">
+              <input type="radio" formControlName="gender" value="Femme" /> Femme
+            </label>
+          </div>
+          <div *ngIf="f('gender')?.invalid && submitted" class="error-message">
+            {{ getError('gender') }}
+          </div>
+        </div>
+
+        <!-- Nom et Prénom -->
+        <div class="row">
+          <div class="input-group">
+            <input type="text" formControlName="lastName" placeholder="Nom" />
+            <div *ngIf="f('lastName')?.invalid && (f('lastName')?.dirty || f('lastName')?.touched || submitted)"
+                 class="error-message">
+              {{ getError('lastName') }}
+            </div>
+          </div>
+
+          <div class="input-group">
+            <input type="text" formControlName="firstName" placeholder="Prénom" />
+            <div *ngIf="f('firstName')?.invalid && (f('firstName')?.dirty || f('firstName')?.touched || submitted)"
+                 class="error-message">
+              {{ getError('firstName') }}
+            </div>
+          </div>
+        </div>
+
+        <!-- CIN et Téléphone -->
+        <div class="row">
+          <div class="input-group">
+            <input type="text" formControlName="cin" placeholder="CIN" />
+            <div *ngIf="f('cin')?.invalid && (f('cin')?.dirty || f('cin')?.touched || submitted)"
+                 class="error-message">
+              {{ getError('cin') }}
+            </div>
+          </div>
+
+          <div class="input-group">
+            <input type="text" formControlName="phone" placeholder="Téléphone" />
+            <div *ngIf="f('phone')?.invalid && (f('phone')?.dirty || f('phone')?.touched || submitted)"
+                 class="error-message">
+              {{ getError('phone') }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Date de naissance et Email -->
+        <div class="row">
+          <div class="input-group">
+            <input type="date" formControlName="birthDate" placeholder="Date de naissance" />
+            <div *ngIf="f('birthDate')?.invalid && (f('birthDate')?.dirty || f('birthDate')?.touched || submitted)"
+                 class="error-message">
+              {{ getError('birthDate') }}
+            </div>
+          </div>
+
+          <div class="input-group">
+            <input type="email" formControlName="email" placeholder="Adresse Email" />
+            <div *ngIf="f('email')?.invalid && (f('email')?.dirty || f('email')?.touched || submitted)"
+                 class="error-message">
+              {{ getError('email') }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Mot de passe et Confirmation -->
+        <div class="row">
+          <div class="input-group">
+            <div class="password-container">
+              <input [type]="hidePwd ? 'password' : 'text'" formControlName="password" placeholder="Mot de passe" />
+              <span class="toggle-pwd" (click)="hidePwd = !hidePwd">
+                {{ hidePwd ? '👁️' : '👁️‍🗨️' }}
+              </span>
+            </div>
+            <div *ngIf="f('password')?.invalid && (f('password')?.dirty || f('password')?.touched || submitted)"
+                 class="error-message">
+              {{ getError('password') }}
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="password-container">
+              <input [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirmation" />
+              <span class="toggle-pwd" (click)="hideConfirm = !hideConfirm">
+                {{ hideConfirm ? '👁️' : '👁️‍🗨️' }}
+              </span>
+            </div>
+            <div *ngIf="f('confirmPassword')?.invalid && (f('confirmPassword')?.dirty || f('confirmPassword')?.touched || submitted)"
+                 class="error-message">
+              {{ getError('confirmPassword') }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Rôle et spécialité (si médecin) -->
+        <div class="row" *ngIf="f('role')?.value === 'doctor'">
+          <div class="input-group">
+            <select formControlName="specialty">
+              <option value="">Sélectionnez une spécialité</option>
+              <option value="generaliste">Généraliste</option>
+              <option value="cardiologue">Cardiologue</option>
+              <!-- Ajoutez d'autres spécialités -->
+            </select>
+            <div *ngIf="f('specialty')?.invalid && submitted" class="error-message">
+              {{ getError('specialty') }}
+            </div>
+          </div>
+
+          <div class="input-group">
+            <input type="text" formControlName="insuranceNumber" placeholder="Numéro d'assurance" />
+            <div *ngIf="f('insuranceNumber')?.invalid && submitted" class="error-message">
+              {{ getError('insuranceNumber') }}
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="loading">
+          <span *ngIf="!loading">S'inscrire</span>
+          <span *ngIf="loading">Traitement...</span>
+        </button>
+
+        <p class="login-text">Vous avez déjà un compte? <a routerLink="/sign-in">Se connecter</a></p>
+      </form>
+    </div>
+  </div>
+</div>
