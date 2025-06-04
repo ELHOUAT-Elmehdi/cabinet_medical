@@ -53,11 +53,11 @@ export class AccueilComponent implements OnInit {
   }
 
   navigateToLogin(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/sign-in']);
   }
 
   navigateToRegister(): void {
-    this.router.navigate(['/register']);
+    this.router.navigate(['/sign-up']);
   }
 
   navigateToModule(module: string): void {
